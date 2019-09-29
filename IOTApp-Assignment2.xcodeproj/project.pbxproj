@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -14,9 +14,18 @@
 		49C6FC8C234013270033CDA7 /* IOTApp_Assignment2.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 49C6FC8A234013270033CDA7 /* IOTApp_Assignment2.xcdatamodeld */; };
 		49C6FC8E234013280033CDA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 49C6FC8D234013280033CDA7 /* Assets.xcassets */; };
 		49C6FC91234013280033CDA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 49C6FC8F234013280033CDA7 /* LaunchScreen.storyboard */; };
+		49C6FC99234014760033CDA7 /* DatabaseProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6FC98234014760033CDA7 /* DatabaseProtocol.swift */; };
+		49C6FC9D234014D90033CDA7 /* MulticastDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6FC9C234014D90033CDA7 /* MulticastDelegate.swift */; };
+		49C6FC9F234015780033CDA7 /* FirebaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6FC9E234015780033CDA7 /* FirebaseController.swift */; };
+		49C6FCA1234015AF0033CDA7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49C6FCA0234015AF0033CDA7 /* GoogleService-Info.plist */; };
+		49C6FCA3234016CB0033CDA7 /* Temperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6FCA2234016CB0033CDA7 /* Temperature.swift */; };
+		49C6FCA5234016FB0033CDA7 /* RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6FCA4234016FB0033CDA7 /* RGB.swift */; };
+		65645A2B8BE44397A884359F /* Pods_IOTApp_Assignment2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9248B2FDF1020C3C0F85BF /* Pods_IOTApp_Assignment2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B3AA11C47427D0CDCEE368F /* Pods-IOTApp-Assignment2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IOTApp-Assignment2.release.xcconfig"; path = "Target Support Files/Pods-IOTApp-Assignment2/Pods-IOTApp-Assignment2.release.xcconfig"; sourceTree = "<group>"; };
+		2015939B3E5914A581416E2C /* Pods-IOTApp-Assignment2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IOTApp-Assignment2.debug.xcconfig"; path = "Target Support Files/Pods-IOTApp-Assignment2/Pods-IOTApp-Assignment2.debug.xcconfig"; sourceTree = "<group>"; };
 		49C6FC7E234013270033CDA7 /* IOTApp-Assignment2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IOTApp-Assignment2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		49C6FC81234013270033CDA7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		49C6FC83234013270033CDA7 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -26,6 +35,13 @@
 		49C6FC8D234013280033CDA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		49C6FC90234013280033CDA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		49C6FC92234013280033CDA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		49C6FC98234014760033CDA7 /* DatabaseProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseProtocol.swift; sourceTree = "<group>"; };
+		49C6FC9C234014D90033CDA7 /* MulticastDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MulticastDelegate.swift; sourceTree = "<group>"; };
+		49C6FC9E234015780033CDA7 /* FirebaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseController.swift; sourceTree = "<group>"; };
+		49C6FCA0234015AF0033CDA7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		49C6FCA2234016CB0033CDA7 /* Temperature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temperature.swift; sourceTree = "<group>"; };
+		49C6FCA4234016FB0033CDA7 /* RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGB.swift; sourceTree = "<group>"; };
+		7A9248B2FDF1020C3C0F85BF /* Pods_IOTApp_Assignment2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IOTApp_Assignment2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,17 +49,29 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65645A2B8BE44397A884359F /* Pods_IOTApp_Assignment2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3F257C9BAF02C95FBD6E8DF8 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2015939B3E5914A581416E2C /* Pods-IOTApp-Assignment2.debug.xcconfig */,
+				0B3AA11C47427D0CDCEE368F /* Pods-IOTApp-Assignment2.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		49C6FC75234013270033CDA7 = {
 			isa = PBXGroup;
 			children = (
 				49C6FC80234013270033CDA7 /* IOTApp-Assignment2 */,
 				49C6FC7F234013270033CDA7 /* Products */,
+				3F257C9BAF02C95FBD6E8DF8 /* Pods */,
+				BD17BCA9A35F7D8550EFA812 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -58,6 +86,8 @@
 		49C6FC80234013270033CDA7 /* IOTApp-Assignment2 */ = {
 			isa = PBXGroup;
 			children = (
+				49C6FCA0234015AF0033CDA7 /* GoogleService-Info.plist */,
+				49C6FC9B234014B20033CDA7 /* Database */,
 				49C6FC81234013270033CDA7 /* AppDelegate.swift */,
 				49C6FC83234013270033CDA7 /* SceneDelegate.swift */,
 				49C6FC85234013270033CDA7 /* ViewController.swift */,
@@ -66,8 +96,28 @@
 				49C6FC8F234013280033CDA7 /* LaunchScreen.storyboard */,
 				49C6FC92234013280033CDA7 /* Info.plist */,
 				49C6FC8A234013270033CDA7 /* IOTApp_Assignment2.xcdatamodeld */,
+				49C6FC9E234015780033CDA7 /* FirebaseController.swift */,
+				49C6FCA2234016CB0033CDA7 /* Temperature.swift */,
+				49C6FCA4234016FB0033CDA7 /* RGB.swift */,
 			);
 			path = "IOTApp-Assignment2";
+			sourceTree = "<group>";
+		};
+		49C6FC9B234014B20033CDA7 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				49C6FC98234014760033CDA7 /* DatabaseProtocol.swift */,
+				49C6FC9C234014D90033CDA7 /* MulticastDelegate.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		BD17BCA9A35F7D8550EFA812 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7A9248B2FDF1020C3C0F85BF /* Pods_IOTApp_Assignment2.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -77,9 +127,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 49C6FC95234013280033CDA7 /* Build configuration list for PBXNativeTarget "IOTApp-Assignment2" */;
 			buildPhases = (
+				20E5A87C026F28C012B0B7CB /* [CP] Check Pods Manifest.lock */,
 				49C6FC7A234013270033CDA7 /* Sources */,
 				49C6FC7B234013270033CDA7 /* Frameworks */,
 				49C6FC7C234013270033CDA7 /* Resources */,
+				72AC775894910F08B0C16A9B /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -129,6 +181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				49C6FC91234013280033CDA7 /* LaunchScreen.storyboard in Resources */,
+				49C6FCA1234015AF0033CDA7 /* GoogleService-Info.plist in Resources */,
 				49C6FC8E234013280033CDA7 /* Assets.xcassets in Resources */,
 				49C6FC89234013270033CDA7 /* Main.storyboard in Resources */,
 			);
@@ -136,15 +189,62 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		20E5A87C026F28C012B0B7CB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-IOTApp-Assignment2-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		72AC775894910F08B0C16A9B /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IOTApp-Assignment2/Pods-IOTApp-Assignment2-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-IOTApp-Assignment2/Pods-IOTApp-Assignment2-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-IOTApp-Assignment2/Pods-IOTApp-Assignment2-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		49C6FC7A234013270033CDA7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				49C6FC86234013270033CDA7 /* ViewController.swift in Sources */,
+				49C6FC9F234015780033CDA7 /* FirebaseController.swift in Sources */,
+				49C6FCA3234016CB0033CDA7 /* Temperature.swift in Sources */,
 				49C6FC82234013270033CDA7 /* AppDelegate.swift in Sources */,
 				49C6FC8C234013270033CDA7 /* IOTApp_Assignment2.xcdatamodeld in Sources */,
 				49C6FC84234013270033CDA7 /* SceneDelegate.swift in Sources */,
+				49C6FCA5234016FB0033CDA7 /* RGB.swift in Sources */,
+				49C6FC99234014760033CDA7 /* DatabaseProtocol.swift in Sources */,
+				49C6FC9D234014D90033CDA7 /* MulticastDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -286,6 +386,7 @@
 		};
 		49C6FC96234013280033CDA7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2015939B3E5914A581416E2C /* Pods-IOTApp-Assignment2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -295,7 +396,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.monash.IOTApp-Assignment2";
+				PRODUCT_BUNDLE_IDENTIFIER = com.monash.Assignment2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -304,6 +405,7 @@
 		};
 		49C6FC97234013280033CDA7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0B3AA11C47427D0CDCEE368F /* Pods-IOTApp-Assignment2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -313,7 +415,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.monash.IOTApp-Assignment2";
+				PRODUCT_BUNDLE_IDENTIFIER = com.monash.Assignment2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
