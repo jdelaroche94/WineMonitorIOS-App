@@ -11,12 +11,10 @@ import UIKit
 
 class homeViewController: UIViewController, DatabaseListener {
         
-    let SECTION_HEROES = 0;
-    let SECTION_COUNT = 1;
-    let CELL_HERO = "heroCell"
-    let CELL_COUNT = "totalHeroesCell"
+    
     @IBOutlet var buttonOutlet: UIButton!
     @IBAction func buttonAction(_ sender: Any) {
+        print(temps)
     }
     
     var temps: [Temperature] = []
@@ -35,16 +33,16 @@ class homeViewController: UIViewController, DatabaseListener {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //databaseController?.addListener(listener: self)
+        databaseController?.addListener(listener: self)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        //databaseController?.removeListener(listener: self)
+        databaseController?.removeListener(listener: self)
     }
     
     
-    var listenerType: ListenerType
+    var listenerType: ListenerType = ListenerType.all
     func onTemperatureChange(change: DatabaseChange, temperatures: [Temperature]) {
         temps = temperatures
     }
