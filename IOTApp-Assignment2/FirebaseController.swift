@@ -18,9 +18,11 @@ class FirebaseController: NSObject, DatabaseProtocol {
     var database: Firestore
     var tempRef: CollectionReference?
     var rgbRef: CollectionReference?
-    
     var tempList: [Temperature]
     var rgbList: [RGB]
+    
+    var whetherRecRef: CollectionReference?
+    var whetherRecList: [Whether_Recommendation]
     
     override init() {
         // To use Firebase in our application we first must run the FirebaseApp configure method
@@ -30,6 +32,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         database = Firestore.firestore()
         tempList = [Temperature]()
         rgbList = [RGB]()
+        whetherRecList = [Whether_Recommendation]()
         
         super.init()
         
@@ -65,6 +68,17 @@ class FirebaseController: NSObject, DatabaseProtocol {
             self.parseRGBSnapshot(snapshot: querySnapshot!)
         }
         
+        whetherRecRef = database.collection("Whether_Recommendations")
+        whetherRecRef?.addSnapshotListener { querySnapshot, error in
+            guard (querySnapshot?.documents) != nil else {
+                print("Error fetching documents: \(error!)")
+                return
+            }
+            self.parseWhetherRecSnapshot(snapshot: querySnapshot!)
+        }
+        
+        
+        
     }
     
     
@@ -87,6 +101,11 @@ class FirebaseController: NSObject, DatabaseProtocol {
                 }
             }
             
+        }
+        listeners.invoke { (listener) in
+            if listener.listenerType == ListenerType.temperatures || listener.listenerType == ListenerType.all {
+                listener.onTemperatureChange(change: .update, temperatures: tempList)
+            }
         }
     }
     
@@ -114,20 +133,62 @@ class FirebaseController: NSObject, DatabaseProtocol {
                 
             }
         }
+        listeners.invoke { (listener) in
+            if listener.listenerType == ListenerType.rgbs || listener.listenerType == ListenerType.all {
+                listener.onRGBChange(change: .update, rgbs: rgbList)
+            }
+        }
+        
+    }
+    
+    func parseWhetherRecSnapshot(snapshot: QuerySnapshot) {
+        snapshot.documentChanges.forEach { change in
+            
+            if (change.document.data()["category"] != nil) {
+                let documentRef = change.document.documentID
+                let category = change.document.data()["category"] as! String
+                let activity = change.document.data()["activity"] as! String
+                let light_min = change.document.data()["light_min"] as! Int
+                let light_max = change.document.data()["light_max"] as! Int
+                let temperature_min = change.document.data()["temperature_min"] as! Int
+                let temperature_max = change.document.data()["temperature_max"] as! Int
+                print(documentRef)
+         
+                if change.type == .added {
+                    print("New Whether Rec: \(change.document.data())")
+                    let newWhetherRec = Whether_Recommendation()
+                    newWhetherRec .id = documentRef
+                    newWhetherRec.category = category
+                    newWhetherRec.activity = activity
+                    newWhetherRec.light_min = light_min
+                    newWhetherRec.light_max = light_max
+                    newWhetherRec.temperature_min = temperature_min
+                    newWhetherRec.temperature_max = temperature_max
+                    whetherRecList.append(newWhetherRec)
+                }
+                
+            }
+        }
+        listeners.invoke { (listener) in
+            if listener.listenerType == ListenerType.whetherRecs || listener.listenerType == ListenerType.all {
+                listener.onWhetherRecChange(change: .update, whetherRecs: whetherRecList)
+            }
+        }
         
     }
     
 
     func addListener(listener: DatabaseListener) {
         listeners.addDelegate(listener)
-//
-//        if listener.listenerType == ListenerType.team || listener.listenerType == ListenerType.all {
-//            listener.onTeamChange(change: .update, teamHeroes: defaultTeam.heroes)
-//        }
-//
-//        if listener.listenerType == ListenerType.heroes || listener.listenerType == ListenerType.all {
-//            listener.onHeroListChange(change: .update, heroes: heroList)
-//        }
+        if listener.listenerType == ListenerType.temperatures || listener.listenerType == ListenerType.all {
+            listener.onTemperatureChange(change: .update, temperatures: tempList)
+        }
+        if listener.listenerType == ListenerType.rgbs || listener.listenerType == ListenerType.all {
+            listener.onRGBChange(change: .update, rgbs: rgbList)
+        }
+        if listener.listenerType == ListenerType.whetherRecs || listener.listenerType == ListenerType.all {
+            listener.onWhetherRecChange(change: .update, whetherRecs: whetherRecList)
+        }
     }
 
     func removeListener(listener: DatabaseListener) {

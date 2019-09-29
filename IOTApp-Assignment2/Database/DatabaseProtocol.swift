@@ -16,13 +16,16 @@ enum DatabaseChange {
 enum ListenerType {
     case temperatures
     case rgbs
+    case whetherRecs
     case all
 }
 protocol DatabaseListener: AnyObject {
     var listenerType: ListenerType {get set}
-    //func onTemperatureChange(change: DatabaseChange, temperatures: [Temperature])
-    //func onRGBChange(change: DatabaseChange, rgbs: [RGB])
+    func onTemperatureChange(change: DatabaseChange, temperatures: [Temperature])
+    func onRGBChange(change: DatabaseChange, rgbs: [RGB])
+    func onWhetherRecChange(change: DatabaseChange, whetherRecs: [Whether_Recommendation])
 }
 protocol DatabaseProtocol: AnyObject {
-
+    func addListener(listener: DatabaseListener)
+    func removeListener(listener: DatabaseListener)
 }

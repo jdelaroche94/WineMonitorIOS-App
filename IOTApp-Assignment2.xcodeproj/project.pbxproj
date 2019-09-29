@@ -20,6 +20,8 @@
 		49C6FCA1234015AF0033CDA7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 49C6FCA0234015AF0033CDA7 /* GoogleService-Info.plist */; };
 		49C6FCA3234016CB0033CDA7 /* Temperature.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6FCA2234016CB0033CDA7 /* Temperature.swift */; };
 		49C6FCA5234016FB0033CDA7 /* RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6FCA4234016FB0033CDA7 /* RGB.swift */; };
+		49C6FCA72340C4A10033CDA7 /* Whether_Recommendation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6FCA62340C4A10033CDA7 /* Whether_Recommendation.swift */; };
+		49C6FCA92340CC100033CDA7 /* homeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6FCA82340CC100033CDA7 /* homeViewController.swift */; };
 		65645A2B8BE44397A884359F /* Pods_IOTApp_Assignment2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A9248B2FDF1020C3C0F85BF /* Pods_IOTApp_Assignment2.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,6 +43,8 @@
 		49C6FCA0234015AF0033CDA7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		49C6FCA2234016CB0033CDA7 /* Temperature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temperature.swift; sourceTree = "<group>"; };
 		49C6FCA4234016FB0033CDA7 /* RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RGB.swift; sourceTree = "<group>"; };
+		49C6FCA62340C4A10033CDA7 /* Whether_Recommendation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Whether_Recommendation.swift; sourceTree = "<group>"; };
+		49C6FCA82340CC100033CDA7 /* homeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeViewController.swift; sourceTree = "<group>"; };
 		7A9248B2FDF1020C3C0F85BF /* Pods_IOTApp_Assignment2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_IOTApp_Assignment2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -99,6 +103,8 @@
 				49C6FC9E234015780033CDA7 /* FirebaseController.swift */,
 				49C6FCA2234016CB0033CDA7 /* Temperature.swift */,
 				49C6FCA4234016FB0033CDA7 /* RGB.swift */,
+				49C6FCA62340C4A10033CDA7 /* Whether_Recommendation.swift */,
+				49C6FCA82340CC100033CDA7 /* homeViewController.swift */,
 			);
 			path = "IOTApp-Assignment2";
 			sourceTree = "<group>";
@@ -238,11 +244,13 @@
 			files = (
 				49C6FC86234013270033CDA7 /* ViewController.swift in Sources */,
 				49C6FC9F234015780033CDA7 /* FirebaseController.swift in Sources */,
+				49C6FCA72340C4A10033CDA7 /* Whether_Recommendation.swift in Sources */,
 				49C6FCA3234016CB0033CDA7 /* Temperature.swift in Sources */,
 				49C6FC82234013270033CDA7 /* AppDelegate.swift in Sources */,
 				49C6FC8C234013270033CDA7 /* IOTApp_Assignment2.xcdatamodeld in Sources */,
 				49C6FC84234013270033CDA7 /* SceneDelegate.swift in Sources */,
 				49C6FCA5234016FB0033CDA7 /* RGB.swift in Sources */,
+				49C6FCA92340CC100033CDA7 /* homeViewController.swift in Sources */,
 				49C6FC99234014760033CDA7 /* DatabaseProtocol.swift in Sources */,
 				49C6FC9D234014D90033CDA7 /* MulticastDelegate.swift in Sources */,
 			);
