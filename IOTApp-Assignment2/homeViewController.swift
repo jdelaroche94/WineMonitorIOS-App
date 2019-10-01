@@ -9,11 +9,14 @@
 import UIKit
 
 
-class homeViewController: UIViewController, DatabaseListener {
+class homeViewController: UIViewController,UITableViewDataSource, UITableViewDelegate, DatabaseListener {
+    
+    
         
     @IBOutlet var pictureOutlet: UIImageView!
     @IBOutlet var temperatureOutlet: UILabel!
     
+    @IBOutlet var activityTableView: UITableView!
     @IBOutlet var buttonOutlet: UIButton!
     @IBAction func buttonAction(_ sender: Any) {
         whetherRecommendations()
@@ -26,8 +29,10 @@ class homeViewController: UIViewController, DatabaseListener {
     var red: Int = 0
     var green: Int = 0
     var blue: Int = 0
-    let nightLightMaximum: Int = 1000
-    let dayLightMinimum: Int = 1001
+    //let nightLightMaximum: Int = 1000
+    //let dayLightMinimum: Int = 1001
+    let ACTIVITY_CELL = "activityCell"
+    var whetherRecList: [Whether_Recommendation] = []
     
     weak var databaseController: DatabaseProtocol?
 
@@ -66,13 +71,32 @@ class homeViewController: UIViewController, DatabaseListener {
         self.whetherRecs = whetherRecs
     }
     
+    func changeImageOnScreen(temperature: Int, rgb: Int){
+        let temperatureString: String = String(temperature) + "ºC"
+        var picture: UIImage?
+        if red <= 1000 {
+            picture = UIImage(named: "night.jpg")
+            temperatureOutlet.textColor = UIColor.white
+        }
+        else if red >= 1001 && red < 8000 {
+            picture = UIImage(named: "sunset.jpg")
+            temperatureOutlet.textColor = UIColor.white
+        }
+        else if red >= 8001 {
+            picture = UIImage(named: "day.jpg")
+            temperatureOutlet.textColor = UIColor.black
+        }
+        pictureOutlet.image = picture
+        temperatureOutlet.text = temperatureString
+    }
+    
+    
     func whetherRecommendations(){
         let numberOfRegs: Int = temps.count
         if numberOfRegs != 0 {
             let numberOfRGBs: Int = rgbs.count
             let temporalTemp: Int = temps[numberOfRegs - 1].tempDegrees
-            if numberOfRGBs != 0{
-                temperature = temporalTemp
+            if numberOfRGBs != 0 {
                 let tempRed: Int = rgbs[numberOfRGBs - 1].red
                 let tempGreen: Int = rgbs[numberOfRGBs - 1].green
                 let tempBlue: Int = rgbs[numberOfRGBs - 1].blue
@@ -81,10 +105,16 @@ class homeViewController: UIViewController, DatabaseListener {
                     red = tempRed
                     green = tempGreen
                     blue = tempBlue
+                    temperature = temporalTemp
+                    changeImageOnScreen(temperature: temporalTemp, rgb: tempRed)
+                    whetherRecList = []
                     for whetherRec in whetherRecs {
-                        //if temperature >= whetherRec.temperature_min && temperature <= whetherRec.temperature_max {
+                        if temporalTemp >= whetherRec.temperature_min && temporalTemp <= whetherRec.temperature_max {
                             if red >= (whetherRec.light_min - 100) && red <= (whetherRec.light_max + 100) {
+                                whetherRecList.append(whetherRec)
                                 print(whetherRec.activity)
+                                
+                                /*
                                 let temperatureString: String = String(temperature) + "ºC"
                                 var picture: UIImage?
                                 if red <= 1000 {
@@ -97,18 +127,33 @@ class homeViewController: UIViewController, DatabaseListener {
                                     print("Aqui estoy 2")
                                 }
                                 pictureOutlet.image = picture
-                                temperatureOutlet.text = temperatureString
+                                temperatureOutlet.text = temperatureString */
                                 //temperatureOutlet.isHidden = false
                                     //pictureOutlet.
                             }
-                        //}
+                        }
                     }
+                    activityTableView.reloadData()
                 }
             }
         }
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return whetherRecList.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let activityCell = tableView.dequeueReusableCell(withIdentifier: ACTIVITY_CELL, for: indexPath) as! ActivityTableViewCell
+        let activity = whetherRecList[indexPath.row]
+        activityCell.activityLabel.text = activity.activity
+        activityCell.categoryLabel.text = activity.category
+        return activityCell
+    }
     
     /*
     // MARK: - Navigation

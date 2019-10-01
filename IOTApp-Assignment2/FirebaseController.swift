@@ -92,7 +92,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
             print(documentRef, date, tempDegrees)
         
             if change.type == .added || change.type == .modified{
-                print("New Temp: \(change.document.data())")
+                //print("New Temp: \(change.document.data())")
                 let newTemp = Temperature()
                 newTemp.id = documentRef
                 newTemp.date = date
@@ -118,10 +118,10 @@ class FirebaseController: NSObject, DatabaseProtocol {
                 let red = change.document.data()["red"] as! Int
                 let green = change.document.data()["green"] as! Int
                 let blue = change.document.data()["blue"] as! Int
-                print(documentRef)
+                //print(documentRef)
          
                 if change.type == .added || change.type == .modified {
-                    print("New RGB: \(change.document.data())")
+                    //print("New RGB: \(change.document.data())")
                     let newRGB = RGB()
                     newRGB.id = documentRef
                     newRGB.date = date
@@ -152,10 +152,10 @@ class FirebaseController: NSObject, DatabaseProtocol {
                 let light_max = change.document.data()["light_max"] as! Int
                 let temperature_min = change.document.data()["temperature_min"] as! Int
                 let temperature_max = change.document.data()["temperature_max"] as! Int
-                print(documentRef)
+                //print(documentRef)
          
                 if change.type == .added {
-                    print("New Whether Rec: \(change.document.data())")
+                    //print("New Whether Rec: \(change.document.data())")
                     let newWhetherRec = Whether_Recommendation()
                     newWhetherRec .id = documentRef
                     newWhetherRec.category = category

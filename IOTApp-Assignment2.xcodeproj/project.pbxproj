@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		492B328F234379D600812F18 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492B328E234379D600812F18 /* ActivityTableViewCell.swift */; };
+		492B329123438E5B00812F18 /* sunset.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 492B329023438E5B00812F18 /* sunset.jpeg */; };
 		49AEE0F223417909001B5354 /* night.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49AEE0F123417908001B5354 /* night.jpg */; };
 		49AEE0F423417918001B5354 /* day.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49AEE0F323417918001B5354 /* day.jpg */; };
 		49C6FC82234013270033CDA7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49C6FC81234013270033CDA7 /* AppDelegate.swift */; };
@@ -30,6 +32,8 @@
 /* Begin PBXFileReference section */
 		0B3AA11C47427D0CDCEE368F /* Pods-IOTApp-Assignment2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IOTApp-Assignment2.release.xcconfig"; path = "Target Support Files/Pods-IOTApp-Assignment2/Pods-IOTApp-Assignment2.release.xcconfig"; sourceTree = "<group>"; };
 		2015939B3E5914A581416E2C /* Pods-IOTApp-Assignment2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IOTApp-Assignment2.debug.xcconfig"; path = "Target Support Files/Pods-IOTApp-Assignment2/Pods-IOTApp-Assignment2.debug.xcconfig"; sourceTree = "<group>"; };
+		492B328E234379D600812F18 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
+		492B329023438E5B00812F18 /* sunset.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sunset.jpeg; sourceTree = SOURCE_ROOT; };
 		49AEE0F123417908001B5354 /* night.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = night.jpg; path = "IOTApp-Assignment2/Pictures/night.jpg"; sourceTree = SOURCE_ROOT; };
 		49AEE0F323417918001B5354 /* day.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = day.jpg; path = "IOTApp-Assignment2/Pictures/day.jpg"; sourceTree = SOURCE_ROOT; };
 		49C6FC7E234013270033CDA7 /* IOTApp-Assignment2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IOTApp-Assignment2.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -76,6 +80,7 @@
 		49AEE0F52341791F001B5354 /* Pictures */ = {
 			isa = PBXGroup;
 			children = (
+				492B329023438E5B00812F18 /* sunset.jpeg */,
 				49AEE0F123417908001B5354 /* night.jpg */,
 				49AEE0F323417918001B5354 /* day.jpg */,
 			);
@@ -119,6 +124,7 @@
 				49C6FCA4234016FB0033CDA7 /* RGB.swift */,
 				49C6FCA62340C4A10033CDA7 /* Whether_Recommendation.swift */,
 				49C6FCA82340CC100033CDA7 /* homeViewController.swift */,
+				492B328E234379D600812F18 /* ActivityTableViewCell.swift */,
 			);
 			path = "IOTApp-Assignment2";
 			sourceTree = "<group>";
@@ -205,6 +211,7 @@
 				49C6FCA1234015AF0033CDA7 /* GoogleService-Info.plist in Resources */,
 				49C6FC8E234013280033CDA7 /* Assets.xcassets in Resources */,
 				49AEE0F223417909001B5354 /* night.jpg in Resources */,
+				492B329123438E5B00812F18 /* sunset.jpeg in Resources */,
 				49C6FC89234013270033CDA7 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -260,6 +267,7 @@
 			files = (
 				49C6FC86234013270033CDA7 /* ViewController.swift in Sources */,
 				49C6FC9F234015780033CDA7 /* FirebaseController.swift in Sources */,
+				492B328F234379D600812F18 /* ActivityTableViewCell.swift in Sources */,
 				49C6FCA72340C4A10033CDA7 /* Whether_Recommendation.swift in Sources */,
 				49C6FCA3234016CB0033CDA7 /* Temperature.swift in Sources */,
 				49C6FC82234013270033CDA7 /* AppDelegate.swift in Sources */,
