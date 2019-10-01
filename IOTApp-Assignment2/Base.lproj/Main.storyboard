@@ -92,7 +92,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Home" id="4ym-sR-KbE"/>
+                    <tabBarItem key="tabBarItem" title="Home" image="house.fill" catalog="system" id="4ym-sR-KbE"/>
                     <navigationItem key="navigationItem" id="X0D-ay-q7u"/>
                     <connections>
                         <outlet property="activityTableView" destination="VlO-1j-7Hq" id="Hmh-SU-dB1"/>
@@ -104,7 +104,7 @@
             </objects>
             <point key="canvasLocation" x="2862.3188405797105" y="94.419642857142847"/>
         </scene>
-        <!--Item-->
+        <!--P-->
         <scene sceneID="ZdM-7P-GrC">
             <objects>
                 <viewController id="Jyb-yv-37i" sceneMemberID="viewController">
@@ -114,7 +114,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <viewLayoutGuide key="safeArea" id="2Kg-bF-pKF"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="VEM-yR-sUS"/>
+                    <tabBarItem key="tabBarItem" title="P" image="person.fill" catalog="system" id="VEM-yR-sUS"/>
                     <navigationItem key="navigationItem" id="r9U-ff-0p5"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="d9X-T6-n7Q" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -142,4 +142,8 @@
             <point key="canvasLocation" x="1952.1739130434785" y="94.419642857142847"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="house.fill" catalog="system" width="64" height="52"/>
+        <image name="person.fill" catalog="system" width="64" height="60"/>
+    </resources>
 </document>

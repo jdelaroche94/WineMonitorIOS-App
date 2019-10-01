@@ -79,7 +79,7 @@ class homeViewController: UIViewController,UITableViewDataSource, UITableViewDel
             temperatureOutlet.textColor = UIColor.white
         }
         else if red >= 1001 && red < 8000 {
-            picture = UIImage(named: "sunset.jpg")
+            picture = UIImage(named: "sunset.jpg") 
             temperatureOutlet.textColor = UIColor.white
         }
         else if red >= 8001 {
