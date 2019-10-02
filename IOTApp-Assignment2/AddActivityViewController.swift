@@ -63,53 +63,50 @@ class AddActivityViewController: UIViewController {
             self.hideKeyboardWhenTappedAround()
         }
         
-        func makePageReadOnly() {
-            if let categoryName = detailActivity?.category {
-                categoryNameField.text = categoryName
-                categoryNameField.isUserInteractionEnabled = false
-            }
-            
-            if let activityName = detailActivity?.activity {
-                activityNameField.text = activityName
-                activityNameField.isUserInteractionEnabled = false
-            }
-            
-            //TODO add content in message
-            activityNameField.isUserInteractionEnabled = false
-            
-            if let minTemp = detailActivity?.temperature_min {
-                
-                switch minTemp{
-                    case chillyMinTemp:
-                        temperatureSegment.selectedSegmentIndex = 0
-                    case coolMinTemp:
-                        temperatureSegment.selectedSegmentIndex = 1
-                    case warmMinTemp:
-                        temperatureSegment.selectedSegmentIndex = 2
-                    default:
-                        temperatureSegment.selectedSegmentIndex = 3
-                    }
-                temperatureSegment.isUserInteractionEnabled = false
-                
-            }
-            
-            if let minLight = detailActivity?.light_min {
-                
-                switch minLight {
-                case darkLightMin:
-                    lightConditionSegment.selectedSegmentIndex = 0
-                case cloudyLightMin:
-                    lightConditionSegment.selectedSegmentIndex = 1
-                default:
-                    lightConditionSegment.selectedSegmentIndex = 2
-                }
-                
-                lightConditionSegment.isUserInteractionEnabled = false
-            }
-            
-            addActivityButton.isHidden = true
+    func makePageReadOnly() {
+        if let categoryName = detailActivity?.category {
+            categoryNameField.text = categoryName
+            //categoryNameField.isUserInteractionEnabled = false
         }
         
+        if let activityName = detailActivity?.activity {
+            activityNameField.text = activityName
+            //activityNameField.isUserInteractionEnabled = false
+        }
+        
+        //TODO add content in message
+        //categoryNameField.isUserInteractionEnabled = false
+        
+        if let minTemp = detailActivity?.temperature_min {
+            
+            switch minTemp{
+            case chillyMinTemp:
+                temperatureSegment.selectedSegmentIndex = 0
+            case coolMinTemp:
+                temperatureSegment.selectedSegmentIndex = 1
+            case warmMinTemp:
+                temperatureSegment.selectedSegmentIndex = 2
+            default:
+                temperatureSegment.selectedSegmentIndex = 3
+            }
+          
+        }
+        
+        if let minLight = detailActivity?.light_min {
+            
+            switch minLight {
+            case darkLightMin:
+                lightConditionSegment.selectedSegmentIndex = 0
+            case darkLightMin:
+                lightConditionSegment.selectedSegmentIndex = 1
+            default:
+                lightConditionSegment.selectedSegmentIndex = 2
+            }
+           
+        }
+        
+        addActivityButton.setTitle("Update Activity", for: .normal)
+    }
 
         @IBAction func addActivityButton(_ sender: Any) {
             if validateAllFields() {
@@ -118,7 +115,11 @@ class AddActivityViewController: UIViewController {
                 // TODO - add the activity to current activities
                 let activity = createObjectWhetherRecomendation()
                 activity.user = (userDefaultController?.retrieveUserId())!
-                let _ = databaseController!.addPersonalisedActivity(whether_recommentation: activity)
+                if let val = checkDetailsPage {
+                     
+                }else{
+                    let _ = databaseController!.addPersonalisedActivity(whether_recommentation: activity)
+                }
                 //addActivityDelegate!.addActivityToList(newActivity: activity)
                 
                 _ = navigationController?.popViewController(animated: true)
