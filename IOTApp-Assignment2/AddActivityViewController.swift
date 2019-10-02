@@ -115,8 +115,14 @@ class AddActivityViewController: UIViewController {
                 // TODO - add the activity to current activities
                 let activity = createObjectWhetherRecomendation()
                 activity.user = (userDefaultController?.retrieveUserId())!
-                if let val = checkDetailsPage {
-                     
+                if checkDetailsPage! {
+                    print("This is detail activity:" + (detailActivity?.id ?? "No encontre nada"))
+                    if detailActivity != nil {
+                        activity.id = detailActivity!.id
+                        databaseController!.updateActivity(whether_recommentation: activity)
+                        //databaseController?.deleteActitivy(whether_recommentation: detailActivity!)
+                        //databaseController!.addPersonalisedActivity(whether_recommentation: activity)
+                    }
                 }else{
                     let _ = databaseController!.addPersonalisedActivity(whether_recommentation: activity)
                 }

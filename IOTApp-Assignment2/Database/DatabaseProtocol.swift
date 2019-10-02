@@ -28,5 +28,7 @@ protocol DatabaseListener: AnyObject {
 protocol DatabaseProtocol: AnyObject {
     func addPersonalisedActivity(whether_recommentation: Whether_Recommendation) -> Whether_Recommendation
     func addListener(listener: DatabaseListener)
+    func deleteActitivy(whether_recommentation: Whether_Recommendation)
     func removeListener(listener: DatabaseListener)
+    func updateActivity(whether_recommentation: Whether_Recommendation) -> Bool
 }

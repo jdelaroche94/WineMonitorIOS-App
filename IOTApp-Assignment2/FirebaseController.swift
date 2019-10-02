@@ -148,13 +148,11 @@ class FirebaseController: NSObject, DatabaseProtocol {
                 let documentRef = change.document.documentID
                 let category = change.document.data()["category"] as! String
                 let activity = change.document.data()["activity"] as! String
-                print(activity)
                 let light_min = change.document.data()["light_min"] as! Int
                 let light_max = change.document.data()["light_max"] as! Int
                 let temperature_min = change.document.data()["temperature_min"] as! Int
                 let temperature_max = change.document.data()["temperature_max"] as! Int
                 let user = change.document.data()["user"] as! String
-                //print(documentRef)
          
                 if change.type == .added {
                     //print("New Whether Rec: \(change.document.data())")
@@ -168,6 +166,23 @@ class FirebaseController: NSObject, DatabaseProtocol {
                     newWhetherRec.temperature_max = temperature_max
                     newWhetherRec.user = user
                     whetherRecList.append(newWhetherRec)
+                }
+                
+                if change.type == .modified {
+                    print("Updated Hero: \(change.document.data())")
+                    let index = getActivityIndexByID(reference: documentRef)!
+                    whetherRecList[index].category = category
+                    whetherRecList[index].activity = activity
+                    whetherRecList[index].light_min = light_min
+                    whetherRecList[index].light_max = light_max
+                    whetherRecList[index].temperature_min = temperature_min
+                    whetherRecList[index].temperature_max = temperature_max
+                }
+                if change.type == .removed {
+                    print("Removed Hero: \(change.document.data())")
+                    if let index = getActivityIndexByID(reference: documentRef) {
+                        whetherRecList.remove(at: index)
+                    }
                 }
                 
             }
@@ -195,14 +210,32 @@ class FirebaseController: NSObject, DatabaseProtocol {
     }
     
     func addPersonalisedActivity(whether_recommentation: Whether_Recommendation) -> Whether_Recommendation {
-        //whetherRecRef
         let id = whetherRecRef?.addDocument(data: ["category" : whether_recommentation.category, "activity" : whether_recommentation.activity, "light_min" : whether_recommentation.light_min, "light_max" : whether_recommentation.light_max, "temperature_min" : whether_recommentation.temperature_min, "temperature_max" : whether_recommentation.temperature_max, "user" : whether_recommentation.user])
         whether_recommentation.id = id!.documentID
         return whether_recommentation
     }
+    
+    func getActivityIndexByID(reference: String) -> Int? {
+        for activity in whetherRecList {
+            if(activity.id == reference) {
+                return whetherRecList.firstIndex(of: activity)
+            }
+        }
+        
+        return nil
+    }
 
+    
     func removeListener(listener: DatabaseListener) {
         listeners.removeDelegate(listener)
     }
 
+    func deleteActitivy(whether_recommentation: Whether_Recommendation) {
+        whetherRecRef?.document(whether_recommentation.id).delete()
+    }
+    
+    func updateActivity(whether_recommentation: Whether_Recommendation) -> Bool {
+        whetherRecRef?.document(whether_recommentation.id).updateData(["category" : whether_recommentation.category, "activity" : whether_recommentation.activity, "light_min" : whether_recommentation.light_min, "light_max" : whether_recommentation.light_max, "temperature_min" : whether_recommentation.temperature_min, "temperature_max" : whether_recommentation.temperature_max])
+        return true
+    }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UserNotifications
 
 
 
@@ -48,6 +49,7 @@ class PersonaliseViewController: UIViewController, UITableViewDelegate, UITableV
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        personalisedRecommendations = []
         databaseController?.addListener(listener: self)
     }
     
@@ -128,8 +130,30 @@ class PersonaliseViewController: UIViewController, UITableViewDelegate, UITableV
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.section == SECTION_ACTIVITY{
+            checkDetailsPage = true
+            selectedRow = indexPath.row
+            tableView.deselectRow(at: indexPath, animated: true)
+            self.performSegue(withIdentifier: "personalisedActivitySegue", sender: self)
+        }
+    }
     
-    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteButton = UITableViewRowAction(style: .normal, title: "Delete", handler: {(rowAction, indexPath) in
+            let alertController = UIAlertController(title: "Delete Personalized Activity", message: "Are you sure to delete \(self.personalisedRecommendations[indexPath.row].activity)", preferredStyle: UIAlertController.Style.alert)
+            alertController.addAction(UIAlertAction(title: "Yes", style: UIAlertAction.Style.default,handler: {(action) in
+                self.databaseController?.deleteActitivy(whether_recommentation: self.personalisedRecommendations[indexPath.row])
+            }))
+            alertController.addAction(UIAlertAction(title: "No", style: UIAlertAction.Style.default,handler: {(action) in
+                
+            }))
+            self.present(alertController, animated: true, completion: nil)
+        })
+        deleteButton.backgroundColor = UIColor.red
+        return [deleteButton]
+    }
+
     
     func addActivityToList(newActivity: Whether_Recommendation) -> Bool {
         personalisedRecommendations.append(newActivity)
@@ -145,14 +169,7 @@ class PersonaliseViewController: UIViewController, UITableViewDelegate, UITableV
         return true
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == SECTION_ACTIVITY{
-            checkDetailsPage = true
-            selectedRow = indexPath.row
-            tableView.deselectRow(at: indexPath, animated: true)
-            self.performSegue(withIdentifier: "personalisedActivitySegue", sender: self)
-        }
-    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        
