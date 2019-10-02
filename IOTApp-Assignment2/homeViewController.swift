@@ -14,9 +14,9 @@ class homeViewController: UIViewController,UITableViewDataSource, UITableViewDel
     
         
     @IBOutlet var pictureOutlet: UIImageView!
-    @IBOutlet var temperatureOutlet: UILabel!
     @IBOutlet var activityTableView: UITableView!
- 
+    @IBOutlet var temperatureOutlet: UILabel!
+    
     
     var temps: [Temperature] = []
     var rgbs: [RGB] = []
@@ -73,6 +73,7 @@ class homeViewController: UIViewController,UITableViewDataSource, UITableViewDel
     }
     
     func changeImageOnScreen(temperature: Int, rgb: Int){
+        
         var picture: UIImage?
         let temperatureString: String? = String(temperature) + "ºC"
         if red <= 1000 { //Dark
@@ -81,7 +82,7 @@ class homeViewController: UIViewController,UITableViewDataSource, UITableViewDel
         }
         else if red >= 1001 && red < 8000 { // Cloudy
             picture = UIImage(named: "sunset.jpg") 
-            temperatureOutlet.textColor = UIColor.black
+            temperatureOutlet.textColor = UIColor.white
         }
         else if red >= 8001 { //Sunny
             picture = UIImage(named: "day.jpg")
@@ -89,8 +90,9 @@ class homeViewController: UIViewController,UITableViewDataSource, UITableViewDel
         }
         pictureOutlet.image = picture
         temperatureOutlet.text = temperatureString
-        temperatureOutlet.isHidden = false
-        pictureOutlet.isHidden = true
+        //print("This is temp outlet text: " + temperatureOutlet.text!)
+        //temperatureOutlet.isHidden = false
+        //pictureOutlet.isHidden = true
     }
     
     
