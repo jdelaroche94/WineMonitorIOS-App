@@ -26,6 +26,7 @@ protocol DatabaseListener: AnyObject {
     func onWhetherRecChange(change: DatabaseChange, whetherRecs: [Whether_Recommendation])
 }
 protocol DatabaseProtocol: AnyObject {
+    func addPersonalisedActivity(whether_recommentation: Whether_Recommendation) -> Whether_Recommendation
     func addListener(listener: DatabaseListener)
     func removeListener(listener: DatabaseListener)
 }

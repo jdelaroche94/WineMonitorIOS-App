@@ -15,18 +15,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rl9-su-RJN">
-                                <rect key="frame" x="8" y="76" width="398" height="252"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="rl9-su-RJN" secondAttribute="height" multiplier="362:229" id="FUS-uu-7dn"/>
-                                </constraints>
-                            </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hty-3O-Zvh">
                                 <rect key="frame" x="352" y="90" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rl9-su-RJN">
+                                <rect key="frame" x="8" y="76" width="398" height="252"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="rl9-su-RJN" secondAttribute="height" multiplier="362:229" id="FUS-uu-7dn"/>
+                                </constraints>
+                            </imageView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="VlO-1j-7Hq">
                                 <rect key="frame" x="8" y="376" width="398" height="429"/>
                                 <prototypes>
@@ -128,7 +128,7 @@
         <!--Personal details-->
         <scene sceneID="U6j-jO-nYD">
             <objects>
-                <viewController title="Personal details" hidesBottomBarWhenPushed="YES" id="6X6-3y-pXd" customClass="DetailsViewController" customModule="Assginment2_swift4_firebase" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Personal details" hidesBottomBarWhenPushed="YES" id="6X6-3y-pXd" customClass="DetailsViewController" customModule="IOTApp_Assignment2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LBx-O7-JGF">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -236,7 +236,7 @@
         <!--My personal activities-->
         <scene sceneID="kcp-3w-5w4">
             <objects>
-                <viewController id="ydg-jQ-z1I" customClass="PersonaliseViewController" customModule="Assginment2_swift4_firebase" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="ydg-jQ-z1I" customClass="PersonaliseViewController" customModule="IOTApp_Assignment2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9ZH-y3-a10">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -319,7 +319,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="caI-Ml-2R2">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="caI-Ml-2R2">
                                 <rect key="frame" x="16" y="118" width="382" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -330,7 +330,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcc-1a-ppH">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Activity:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fcc-1a-ppH">
                                 <rect key="frame" x="16" y="209" width="382" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
@@ -366,8 +366,8 @@
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="E1b-4U-wpu">
                                 <rect key="frame" x="16" y="425" width="382" height="32"/>
                                 <segments>
+                                    <segment title="Dark"/>
                                     <segment title="Cloudy"/>
-                                    <segment title="Clear"/>
                                     <segment title="Sunny"/>
                                 </segments>
                                 <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -414,9 +414,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="zG0-ts-04d"/>
                     <connections>
-                        <outlet property="activityNameField" destination="qKN-ez-Eyo" id="LSy-o1-PBR"/>
-                        <outlet property="activityPersonalisedMessageField" destination="cA9-lK-gga" id="R8w-CB-2HC"/>
+                        <outlet property="activityNameField" destination="cA9-lK-gga" id="R8w-CB-2HC"/>
                         <outlet property="addActivityButton" destination="aOH-Mw-Mhl" id="ieu-IM-UgO"/>
+                        <outlet property="categoryNameField" destination="qKN-ez-Eyo" id="LSy-o1-PBR"/>
                         <outlet property="lightConditionSegment" destination="E1b-4U-wpu" id="tth-PW-vXU"/>
                         <outlet property="temperatureSegment" destination="Tyg-ku-gxu" id="Y77-su-lZu"/>
                     </connections>

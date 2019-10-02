@@ -8,8 +8,15 @@
 
 import UIKit
 
-class PersonaliseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddActivityDelegate {
+
+
+
+class PersonaliseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddActivityDelegate, DatabaseListener {
     
+    
+    var listenerType: ListenerType = ListenerType.all
+    weak var databaseController: DatabaseProtocol?
+    weak var userDefaultController: UserDefaultsProtocol?
     @IBOutlet weak var tableView: UITableView!
     
     let SECTION_ACTIVITY = 0;
@@ -21,6 +28,53 @@ class PersonaliseViewController: UIViewController, UITableViewDelegate, UITableV
     
     var checkDetailsPage = false
     var selectedRow = 0
+    
+    
+    override func viewDidLoad() {
+            super.viewDidLoad()
+            tableView.tableFooterView = UIView()
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            userDefaultController = appDelegate.userDefaultController
+            databaseController = appDelegate.databaseController
+            personalisedRecommendations = [Whether_Recommendation]()
+            
+    //        let pr = Whether_Recommendation()
+    //        pr.activity = "Fun"
+    //        personalisedRecommendations.append(pr)
+        }
+        
+      
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        databaseController?.addListener(listener: self)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        databaseController?.removeListener(listener: self)
+    }
+    
+    
+    func onTemperatureChange(change: DatabaseChange, temperatures: [Temperature]) {
+    }
+    
+    func onRGBChange(change: DatabaseChange, rgbs: [RGB]) {
+    }
+    
+    func onWhetherRecChange(change: DatabaseChange, whetherRecs: [Whether_Recommendation]) {
+        let user = userDefaultController?.retrieveUserId()
+        personalisedRecommendations = []
+        for whether in whetherRecs{
+            if whether.user == user {
+                self.personalisedRecommendations.append(whether)
+                tableView.reloadData()
+            }
+        }
+    }
+    
+    
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
@@ -74,14 +128,8 @@ class PersonaliseViewController: UIViewController, UITableViewDelegate, UITableV
         return cell
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.tableFooterView = UIView()
-        personalisedRecommendations = [Whether_Recommendation]()
-//        let pr = Whether_Recommendation()
-//        pr.activity = "Fun"
-//        personalisedRecommendations.append(pr)
-    }
+    
+    
     
     func addActivityToList(newActivity: Whether_Recommendation) -> Bool {
         personalisedRecommendations.append(newActivity)

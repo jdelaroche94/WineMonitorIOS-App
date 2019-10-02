@@ -16,6 +16,7 @@ class Whether_Recommendation: NSObject {
     var light_max: Int
     var temperature_min: Int
     var temperature_max: Int
+    var user: String
     
     override init(){
         self.id = ""
@@ -25,5 +26,6 @@ class Whether_Recommendation: NSObject {
         self.light_min = 0
         self.temperature_min = 0
         self.temperature_max = 0
+        self.user=""
     }
 }

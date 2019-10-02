@@ -15,12 +15,8 @@ class homeViewController: UIViewController,UITableViewDataSource, UITableViewDel
         
     @IBOutlet var pictureOutlet: UIImageView!
     @IBOutlet var temperatureOutlet: UILabel!
-    
     @IBOutlet var activityTableView: UITableView!
-    @IBOutlet var buttonOutlet: UIButton!
-    @IBAction func buttonAction(_ sender: Any) {
-        whetherRecommendations()
-    }
+ 
     
     var temps: [Temperature] = []
     var rgbs: [RGB] = []
@@ -31,15 +27,19 @@ class homeViewController: UIViewController,UITableViewDataSource, UITableViewDel
     var blue: Int = 0
     //let nightLightMaximum: Int = 1000
     //let dayLightMinimum: Int = 1001
+    //var picture: UIImage?
+    //var temperatureString: String?
     let ACTIVITY_CELL = "activityCell"
     var whetherRecList: [Whether_Recommendation] = []
     
     weak var databaseController: DatabaseProtocol?
+    weak var userDefaultController: UserDefaultsProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         let appDelegate = UIApplication.shared.delegate as! AppDelegate
         databaseController = appDelegate.databaseController
+        userDefaultController = appDelegate.userDefaultController
         //temperatureOutlet.isHidden = true
         // Do any additional setup after loading the view.
     }
@@ -64,23 +64,24 @@ class homeViewController: UIViewController,UITableViewDataSource, UITableViewDel
     func onRGBChange(change: DatabaseChange, rgbs: [RGB]) {
         self.rgbs = rgbs
         whetherRecommendations()
-        print("Aqui estoy")
     }
     
     func onWhetherRecChange(change: DatabaseChange, whetherRecs: [Whether_Recommendation]) {
         self.whetherRecs = whetherRecs
+        whetherRecommendations()
+        
     }
     
     func changeImageOnScreen(temperature: Int, rgb: Int){
-        let temperatureString: String = String(temperature) + "ºC"
         var picture: UIImage?
+        let temperatureString: String? = String(temperature) + "ºC"
         if red <= 1000 { //Dark
             picture = UIImage(named: "night.jpg")
             temperatureOutlet.textColor = UIColor.white
         }
         else if red >= 1001 && red < 8000 { // Cloudy
             picture = UIImage(named: "sunset.jpg") 
-            temperatureOutlet.textColor = UIColor.white
+            temperatureOutlet.textColor = UIColor.black
         }
         else if red >= 8001 { //Sunny
             picture = UIImage(named: "day.jpg")
@@ -88,11 +89,14 @@ class homeViewController: UIViewController,UITableViewDataSource, UITableViewDel
         }
         pictureOutlet.image = picture
         temperatureOutlet.text = temperatureString
+        temperatureOutlet.isHidden = false
+        pictureOutlet.isHidden = true
     }
     
     
     func whetherRecommendations(){
         let numberOfRegs: Int = temps.count
+        let user = userDefaultController?.retrieveUserId()
         if numberOfRegs != 0 {
             let numberOfRGBs: Int = rgbs.count
             let temporalTemp: Int = temps[numberOfRegs - 1].tempDegrees
@@ -101,7 +105,7 @@ class homeViewController: UIViewController,UITableViewDataSource, UITableViewDel
                 let tempGreen: Int = rgbs[numberOfRGBs - 1].green
                 let tempBlue: Int = rgbs[numberOfRGBs - 1].blue
                 print("Temp: \(temporalTemp) and Light: \(tempRed)")
-                if tempRed != red || tempGreen != green || tempBlue != blue{
+                //if tempRed != red || tempGreen != green || tempBlue != blue{
                     red = tempRed
                     green = tempGreen
                     blue = tempBlue
@@ -111,7 +115,12 @@ class homeViewController: UIViewController,UITableViewDataSource, UITableViewDel
                     for whetherRec in whetherRecs {
                         if temporalTemp >= whetherRec.temperature_min && temporalTemp <= whetherRec.temperature_max {
                             if red >= (whetherRec.light_min - 100) && red <= (whetherRec.light_max + 100) {
-                                whetherRecList.append(whetherRec)
+                                if whetherRec.user == "sudoActivities9873" {
+                                    whetherRecList.append(whetherRec)
+                                }
+                                else if whetherRec.user == user {
+                                    whetherRecList.append(whetherRec)
+                                }
                                 print(whetherRec.activity)
                                 
                                 /*
@@ -134,7 +143,7 @@ class homeViewController: UIViewController,UITableViewDataSource, UITableViewDel
                         }
                     }
                     activityTableView.reloadData()
-                }
+                //}
             }
         }
     }

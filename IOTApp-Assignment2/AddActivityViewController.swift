@@ -10,14 +10,15 @@ import UIKit
 
 class AddActivityViewController: UIViewController {
 
+        @IBOutlet weak var categoryNameField: UITextField!
         @IBOutlet weak var activityNameField: UITextField!
-        @IBOutlet weak var activityPersonalisedMessageField: UITextField!
         @IBOutlet weak var temperatureSegment: UISegmentedControl!
         @IBOutlet weak var lightConditionSegment: UISegmentedControl!
       
         @IBOutlet weak var addActivityButton: UIButton!
         
         weak var addActivityDelegate: AddActivityDelegate?
+        weak var databaseController: DatabaseProtocol?
         
         var checkDetailsPage: Bool?
         var detailActivity: Whether_Recommendation?
@@ -36,13 +37,13 @@ class AddActivityViewController: UIViewController {
         let hotMinTemp = 25
         let hotMaxTemp = 100
         
-        let cloudyLightMin = 0
-        let cloudyLightMax = 1000
+        let darkLightMin = 0
+        let darkLightMax = 1000
         
-        let clearLightMin = 1001
-        let cleatLightMax = 5000
+        let cloudyLightMin = 1001
+        let cloudyLightMax = 8000
         
-        let sunnyLightMin  = 5001
+        let sunnyLightMin  = 8001
         let sunnyLightMax = 70000
 
         override func viewDidLoad() {
@@ -50,23 +51,31 @@ class AddActivityViewController: UIViewController {
             
             let appDelegate = UIApplication.shared.delegate as! AppDelegate
             userDefaultController = appDelegate.userDefaultController
-
-             temperatureSegment.selectedSegmentIndex = UISegmentedControl.noSegment
-             lightConditionSegment.selectedSegmentIndex = UISegmentedControl.noSegment
+            databaseController = appDelegate.databaseController
             
-            if let val = checkDetailsPage {
+            temperatureSegment.selectedSegmentIndex = UISegmentedControl.noSegment
+            lightConditionSegment.selectedSegmentIndex = UISegmentedControl.noSegment
+            
+            if checkDetailsPage == true  {
                 makePageReadOnly()
             }
+            
+            self.hideKeyboardWhenTappedAround()
         }
         
         func makePageReadOnly() {
-            if let name = detailActivity?.activity {
-                activityNameField.text = name
+            if let categoryName = detailActivity?.category {
+                categoryNameField.text = categoryName
+                categoryNameField.isUserInteractionEnabled = false
+            }
+            
+            if let activityName = detailActivity?.activity {
+                activityNameField.text = activityName
                 activityNameField.isUserInteractionEnabled = false
             }
             
             //TODO add content in message
-            activityPersonalisedMessageField.isUserInteractionEnabled = false
+            activityNameField.isUserInteractionEnabled = false
             
             if let minTemp = detailActivity?.temperature_min {
                 
@@ -87,9 +96,9 @@ class AddActivityViewController: UIViewController {
             if let minLight = detailActivity?.light_min {
                 
                 switch minLight {
-                case cloudyLightMin:
+                case darkLightMin:
                     lightConditionSegment.selectedSegmentIndex = 0
-                case clearLightMin:
+                case cloudyLightMin:
                     lightConditionSegment.selectedSegmentIndex = 1
                 default:
                     lightConditionSegment.selectedSegmentIndex = 2
@@ -104,16 +113,14 @@ class AddActivityViewController: UIViewController {
 
         @IBAction func addActivityButton(_ sender: Any) {
             if validateAllFields() {
-                
-                //TODO - variable bellow cannot be added to current class of whether_recommendation
-                let personalisedMessage = activityPersonalisedMessageField.text
-                
-                // TODO - Call to add this activity to firebase
+               // TODO - Call to add this activity to firebase
                 
                 // TODO - add the activity to current activities
                 let activity = createObjectWhetherRecomendation()
-                print (activity.activity)
-                addActivityDelegate!.addActivityToList(newActivity: activity)
+                activity.user = (userDefaultController?.retrieveUserId())!
+                let _ = databaseController!.addPersonalisedActivity(whether_recommentation: activity)
+                //addActivityDelegate!.addActivityToList(newActivity: activity)
+                
                 _ = navigationController?.popViewController(animated: true)
                 
             }
@@ -122,7 +129,7 @@ class AddActivityViewController: UIViewController {
         func createObjectWhetherRecomendation() -> Whether_Recommendation {
             let activity = Whether_Recommendation()
             activity.activity = activityNameField.text!
-            activity.category = "Personalised"
+            activity.category = categoryNameField.text!
             switch temperatureSegment.selectedSegmentIndex {
             case 0:
                 activity.temperature_min = chillyMinTemp
@@ -140,18 +147,18 @@ class AddActivityViewController: UIViewController {
             
             switch lightConditionSegment.selectedSegmentIndex {
             case 0:
+                activity.light_min = darkLightMin
+                activity.light_max = darkLightMax
+            case 1:
                 activity.light_min = cloudyLightMin
                 activity.light_max = cloudyLightMax
-            case 1:
-                activity.light_min = clearLightMin
-                activity.light_max = cleatLightMax
             default:
                 activity.light_min = sunnyLightMin
                 activity.light_max = sunnyLightMax
             }
             
-            activity.id = (userDefaultController?.retrieveUserId())!
-            
+            activity.user = (userDefaultController?.retrieveUserId())!
+            print("This is the user:" + activity.user)
             return activity
         }
         
@@ -162,11 +169,11 @@ class AddActivityViewController: UIViewController {
         }
         
         func validateAllFields() -> Bool {
-            if (activityNameField.text?.isEmpty)! {
-                showError(title: "Empty Activity Name", message: "Please complete the field")
+            if (categoryNameField.text?.isEmpty)! {
+                showError(title: "Empty Category Name", message: "Please complete the field")
                 return false
-            }else if (activityPersonalisedMessageField.text?.isEmpty)! {
-                showError(title: "Empty Activity Message", message: "Please complete the field")
+            }else if (activityNameField.text?.isEmpty)! {
+                showError(title: "Empty Activity Name", message: "Please complete the field")
                 return false
             }else if temperatureSegment.selectedSegmentIndex == UISegmentedControl.noSegment {
                 showError(title: "Choose Temperature", message: "Please select proper option")
@@ -191,3 +198,16 @@ class AddActivityViewController: UIViewController {
         */
 
     }
+
+// Put this piece of code anywhere you like
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}
