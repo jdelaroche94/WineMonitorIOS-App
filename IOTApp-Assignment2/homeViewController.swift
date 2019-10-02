@@ -74,15 +74,15 @@ class homeViewController: UIViewController,UITableViewDataSource, UITableViewDel
     func changeImageOnScreen(temperature: Int, rgb: Int){
         let temperatureString: String = String(temperature) + "ºC"
         var picture: UIImage?
-        if red <= 1000 {
+        if red <= 1000 { //Dark
             picture = UIImage(named: "night.jpg")
             temperatureOutlet.textColor = UIColor.white
         }
-        else if red >= 1001 && red < 8000 {
+        else if red >= 1001 && red < 8000 { // Cloudy
             picture = UIImage(named: "sunset.jpg") 
             temperatureOutlet.textColor = UIColor.white
         }
-        else if red >= 8001 {
+        else if red >= 8001 { //Sunny
             picture = UIImage(named: "day.jpg")
             temperatureOutlet.textColor = UIColor.black
         }

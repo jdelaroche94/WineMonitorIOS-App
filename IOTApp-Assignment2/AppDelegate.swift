@@ -14,11 +14,13 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
     
     var databaseController: DatabaseProtocol?
-    
+    // UserDefaults
+    var userDefaultController: UserDefaultsProtocol?
    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         databaseController = FirebaseController()
+        userDefaultController = UserDefaultController()
         return true
     }
 

@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		490B2BE623441B7D009C795A /* UserDefaultController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490B2BE423441B7C009C795A /* UserDefaultController.swift */; };
+		490B2BE723441B7D009C795A /* UserDefaultsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490B2BE523441B7D009C795A /* UserDefaultsProtocol.swift */; };
+		490B2BE923441C16009C795A /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490B2BE823441C16009C795A /* DetailsViewController.swift */; };
+		490B2BEB234425A1009C795A /* PersonaliseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490B2BEA234425A1009C795A /* PersonaliseViewController.swift */; };
+		490B2BED23442613009C795A /* AddActivityDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490B2BEC23442613009C795A /* AddActivityDelegate.swift */; };
+		490B2BEF23442797009C795A /* AddActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 490B2BEE23442797009C795A /* AddActivityViewController.swift */; };
 		492B328F234379D600812F18 /* ActivityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 492B328E234379D600812F18 /* ActivityTableViewCell.swift */; };
 		492B329123438E5B00812F18 /* sunset.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 492B329023438E5B00812F18 /* sunset.jpeg */; };
 		49AEE0F223417909001B5354 /* night.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 49AEE0F123417908001B5354 /* night.jpg */; };
@@ -32,6 +38,12 @@
 /* Begin PBXFileReference section */
 		0B3AA11C47427D0CDCEE368F /* Pods-IOTApp-Assignment2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IOTApp-Assignment2.release.xcconfig"; path = "Target Support Files/Pods-IOTApp-Assignment2/Pods-IOTApp-Assignment2.release.xcconfig"; sourceTree = "<group>"; };
 		2015939B3E5914A581416E2C /* Pods-IOTApp-Assignment2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-IOTApp-Assignment2.debug.xcconfig"; path = "Target Support Files/Pods-IOTApp-Assignment2/Pods-IOTApp-Assignment2.debug.xcconfig"; sourceTree = "<group>"; };
+		490B2BE423441B7C009C795A /* UserDefaultController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultController.swift; sourceTree = "<group>"; };
+		490B2BE523441B7D009C795A /* UserDefaultsProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsProtocol.swift; sourceTree = "<group>"; };
+		490B2BE823441C16009C795A /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
+		490B2BEA234425A1009C795A /* PersonaliseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaliseViewController.swift; sourceTree = "<group>"; };
+		490B2BEC23442613009C795A /* AddActivityDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddActivityDelegate.swift; sourceTree = "<group>"; };
+		490B2BEE23442797009C795A /* AddActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddActivityViewController.swift; sourceTree = "<group>"; };
 		492B328E234379D600812F18 /* ActivityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityTableViewCell.swift; sourceTree = "<group>"; };
 		492B329023438E5B00812F18 /* sunset.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = sunset.jpeg; sourceTree = SOURCE_ROOT; };
 		49AEE0F123417908001B5354 /* night.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = night.jpg; path = "IOTApp-Assignment2/Pictures/night.jpg"; sourceTree = SOURCE_ROOT; };
@@ -77,6 +89,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		490B2BE323441B33009C795A /* UserDefaults */ = {
+			isa = PBXGroup;
+			children = (
+				490B2BE423441B7C009C795A /* UserDefaultController.swift */,
+				490B2BE523441B7D009C795A /* UserDefaultsProtocol.swift */,
+			);
+			path = UserDefaults;
+			sourceTree = "<group>";
+		};
 		49AEE0F52341791F001B5354 /* Pictures */ = {
 			isa = PBXGroup;
 			children = (
@@ -108,6 +129,7 @@
 		49C6FC80234013270033CDA7 /* IOTApp-Assignment2 */ = {
 			isa = PBXGroup;
 			children = (
+				490B2BE323441B33009C795A /* UserDefaults */,
 				49AEE0F52341791F001B5354 /* Pictures */,
 				49C6FCA0234015AF0033CDA7 /* GoogleService-Info.plist */,
 				49C6FC9B234014B20033CDA7 /* Database */,
@@ -125,6 +147,10 @@
 				49C6FCA62340C4A10033CDA7 /* Whether_Recommendation.swift */,
 				49C6FCA82340CC100033CDA7 /* homeViewController.swift */,
 				492B328E234379D600812F18 /* ActivityTableViewCell.swift */,
+				490B2BE823441C16009C795A /* DetailsViewController.swift */,
+				490B2BEA234425A1009C795A /* PersonaliseViewController.swift */,
+				490B2BEC23442613009C795A /* AddActivityDelegate.swift */,
+				490B2BEE23442797009C795A /* AddActivityViewController.swift */,
 			);
 			path = "IOTApp-Assignment2";
 			sourceTree = "<group>";
@@ -268,15 +294,21 @@
 				49C6FC86234013270033CDA7 /* ViewController.swift in Sources */,
 				49C6FC9F234015780033CDA7 /* FirebaseController.swift in Sources */,
 				492B328F234379D600812F18 /* ActivityTableViewCell.swift in Sources */,
+				490B2BEF23442797009C795A /* AddActivityViewController.swift in Sources */,
 				49C6FCA72340C4A10033CDA7 /* Whether_Recommendation.swift in Sources */,
+				490B2BE723441B7D009C795A /* UserDefaultsProtocol.swift in Sources */,
 				49C6FCA3234016CB0033CDA7 /* Temperature.swift in Sources */,
+				490B2BE623441B7D009C795A /* UserDefaultController.swift in Sources */,
 				49C6FC82234013270033CDA7 /* AppDelegate.swift in Sources */,
 				49C6FC8C234013270033CDA7 /* IOTApp_Assignment2.xcdatamodeld in Sources */,
 				49C6FC84234013270033CDA7 /* SceneDelegate.swift in Sources */,
+				490B2BED23442613009C795A /* AddActivityDelegate.swift in Sources */,
 				49C6FCA5234016FB0033CDA7 /* RGB.swift in Sources */,
 				49C6FCA92340CC100033CDA7 /* homeViewController.swift in Sources */,
 				49C6FC99234014760033CDA7 /* DatabaseProtocol.swift in Sources */,
 				49C6FC9D234014D90033CDA7 /* MulticastDelegate.swift in Sources */,
+				490B2BEB234425A1009C795A /* PersonaliseViewController.swift in Sources */,
+				490B2BE923441C16009C795A /* DetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
