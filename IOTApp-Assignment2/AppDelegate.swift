@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  IOTApp-Assignment2
 //
-//  Created by Julian A De La Roche on 29/9/19.
+//  Created by Julian A De La Roche and Nick on 29/9/19.
 //  Copyright © 2019 Julian A De La Roche. All rights reserved.
 //
 
@@ -19,7 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        userDefaultController = UserDefaultController()
+        userDefaultController = UserDefaultController()  // creates the object of userDefaukltController
+        
         databaseController = FirebaseController()
         return true
     }

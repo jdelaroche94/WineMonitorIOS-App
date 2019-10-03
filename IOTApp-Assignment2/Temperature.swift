@@ -8,6 +8,7 @@
 
 import UIKit
 
+//This class creates a new Temperature Object.
 class Temperature: NSObject {
 
     var id: String

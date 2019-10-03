@@ -30,5 +30,5 @@ protocol DatabaseProtocol: AnyObject {
     func addListener(listener: DatabaseListener)
     func deleteActitivy(whether_recommentation: Whether_Recommendation)
     func removeListener(listener: DatabaseListener)
-    func updateActivity(whether_recommentation: Whether_Recommendation) -> Bool
+    func updateActivity(whether_recommentation: Whether_Recommendation)
 }

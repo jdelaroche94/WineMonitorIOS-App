@@ -8,6 +8,7 @@
 
 import Foundation
 
+//This protocol will be used for manipulate the userDefault variables that are stored in device
 protocol UserDefaultsProtocol: AnyObject {
     func assignName(name: String)
     func assignGender(gender: String)

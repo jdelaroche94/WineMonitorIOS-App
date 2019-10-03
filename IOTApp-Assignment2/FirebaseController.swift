@@ -25,14 +25,14 @@ class FirebaseController: NSObject, DatabaseProtocol {
     var whetherRecList: [Whether_Recommendation]
     
     override init() {
-        // To use Firebase in our application we first must run the FirebaseApp configure method
+        // Configure method to establish a connection with Firebase
         FirebaseApp.configure()
-        // We call auth and firestore to get access to these frameworks
+        // Calling the autController to access Firebase collections
         authController = Auth.auth()
         database = Firestore.firestore()
-        tempList = [Temperature]()
-        rgbList = [RGB]()
-        whetherRecList = [Whether_Recommendation]()
+        tempList = [Temperature]() // List of temperatures
+        rgbList = [RGB]() // List of RGB
+        whetherRecList = [Whether_Recommendation]() // List of whether recommendations or activities.
         
         super.init()
         
@@ -42,11 +42,12 @@ class FirebaseController: NSObject, DatabaseProtocol {
             guard authResult != nil else {
                 fatalError("Firebase authentication failed")
             }
-            // Once we have authenticated we can attach our listeners to the firebase firestore
+            // Attaching the listeners to the firebase firestore
             self.setUpListeners()
         }
     }
     
+    //This method setting up the listeners of Temperature, RGB and Whether_Recommendation
     func setUpListeners() {
         tempRef = database.collection("Temperature")
         tempRef?.order(by: "dateTime").limit(to:1)
@@ -76,23 +77,16 @@ class FirebaseController: NSObject, DatabaseProtocol {
             }
             self.parseWhetherRecSnapshot(snapshot: querySnapshot!)
         }
-        
-        
-        
     }
     
-    
+    //This method add all the temperatures from Firebase to a list called tempList
     func parseTemperaturesSnapshot(snapshot: QuerySnapshot) {
         snapshot.documentChanges.forEach { change in
         if (change.document.data()["date"] != nil) {
             let documentRef = change.document.documentID
             let date = change.document.data()["date"] as! String
             let tempDegrees = change.document.data()["tempDegrees"] as! Int
-       
-            print(documentRef, date, tempDegrees)
-        
-            if change.type == .added || change.type == .modified{
-                //print("New Temp: \(change.document.data())")
+            if change.type == .added {
                 let newTemp = Temperature()
                 newTemp.id = documentRef
                 newTemp.date = date
@@ -109,6 +103,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         }
     }
     
+    //This method add all the RGB from Firebase to a list called rgbList
     func parseRGBSnapshot(snapshot: QuerySnapshot) {
         snapshot.documentChanges.forEach { change in
             
@@ -141,6 +136,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         
     }
     
+    //This method add, update and removes all the Whether_Recommendations or activities from Firebase to a list called whetherRecList
     func parseWhetherRecSnapshot(snapshot: QuerySnapshot) {
         snapshot.documentChanges.forEach { change in
             
@@ -155,7 +151,6 @@ class FirebaseController: NSObject, DatabaseProtocol {
                 let user = change.document.data()["user"] as! String
          
                 if change.type == .added {
-                    //print("New Whether Rec: \(change.document.data())")
                     let newWhetherRec = Whether_Recommendation()
                     newWhetherRec.id = documentRef
                     newWhetherRec.category = category
@@ -169,7 +164,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
                 }
                 
                 if change.type == .modified {
-                    print("Updated Hero: \(change.document.data())")
+
                     let index = getActivityIndexByID(reference: documentRef)!
                     whetherRecList[index].category = category
                     whetherRecList[index].activity = activity
@@ -179,7 +174,6 @@ class FirebaseController: NSObject, DatabaseProtocol {
                     whetherRecList[index].temperature_max = temperature_max
                 }
                 if change.type == .removed {
-                    print("Removed Hero: \(change.document.data())")
                     if let index = getActivityIndexByID(reference: documentRef) {
                         whetherRecList.remove(at: index)
                     }
@@ -195,7 +189,7 @@ class FirebaseController: NSObject, DatabaseProtocol {
         
     }
     
-
+    //This method add all the listeners which control any updates into the three different collections.
     func addListener(listener: DatabaseListener) {
         listeners.addDelegate(listener)
         if listener.listenerType == ListenerType.temperatures || listener.listenerType == ListenerType.all {
@@ -209,33 +203,35 @@ class FirebaseController: NSObject, DatabaseProtocol {
         }
     }
     
+    //This method allows to add a personalised whether_recommendation or activity into Firebase.
     func addPersonalisedActivity(whether_recommentation: Whether_Recommendation) -> Whether_Recommendation {
         let id = whetherRecRef?.addDocument(data: ["category" : whether_recommentation.category, "activity" : whether_recommentation.activity, "light_min" : whether_recommentation.light_min, "light_max" : whether_recommentation.light_max, "temperature_min" : whether_recommentation.temperature_min, "temperature_max" : whether_recommentation.temperature_max, "user" : whether_recommentation.user])
         whether_recommentation.id = id!.documentID
         return whether_recommentation
     }
     
+    //This method allows to get Index of the references to be updated or deleted.
     func getActivityIndexByID(reference: String) -> Int? {
         for activity in whetherRecList {
             if(activity.id == reference) {
                 return whetherRecList.firstIndex(of: activity)
             }
         }
-        
         return nil
     }
 
-    
+    //This method allows to remove the delegates in those classes when the listeners are calling.
     func removeListener(listener: DatabaseListener) {
         listeners.removeDelegate(listener)
     }
-
+    
+    //This method allows to remove a personalised whether_recommendation or activity from Firebase
     func deleteActitivy(whether_recommentation: Whether_Recommendation) {
         whetherRecRef?.document(whether_recommentation.id).delete()
     }
     
-    func updateActivity(whether_recommentation: Whether_Recommendation) -> Bool {
+    //This method allows to update a personalised whether_recommendation or activity from Firebase
+    func updateActivity(whether_recommentation: Whether_Recommendation) {
         whetherRecRef?.document(whether_recommentation.id).updateData(["category" : whether_recommentation.category, "activity" : whether_recommentation.activity, "light_min" : whether_recommentation.light_min, "light_max" : whether_recommentation.light_max, "temperature_min" : whether_recommentation.temperature_min, "temperature_max" : whether_recommentation.temperature_max])
-        return true
     }
 }

@@ -8,6 +8,7 @@
 
 import UIKit
 
+//This class creates RGB objects
 class RGB: NSObject {
     var id: String
     var date: String

@@ -9,44 +9,32 @@
 import UIKit
 import UserNotifications
 
-
-
-
+//This class allows to manage all the personalised whether recommendations or activities.
 class PersonaliseViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddActivityDelegate, DatabaseListener {
-    
     
     var listenerType: ListenerType = ListenerType.all
     weak var databaseController: DatabaseProtocol?
     weak var userDefaultController: UserDefaultsProtocol?
     @IBOutlet weak var tableView: UITableView!
-    
     let SECTION_ACTIVITY = 0;
     let SECTION_COUNT = 1;
     let CELL_COUNT = "CellCounter"
     let CELL_ACTIVITY = "Cell"
-    
     var personalisedRecommendations: [Whether_Recommendation] = []
-    
     var checkDetailsPage = false
     var selectedRow = 0
     
     
     override func viewDidLoad() {
-            super.viewDidLoad()
-            tableView.tableFooterView = UIView()
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            userDefaultController = appDelegate.userDefaultController
-            databaseController = appDelegate.databaseController
-            personalisedRecommendations = [Whether_Recommendation]()
-            
-    //        let pr = Whether_Recommendation()
-    //        pr.activity = "Fun"
-    //        personalisedRecommendations.append(pr)
-        }
+        super.viewDidLoad()
+        tableView.tableFooterView = UIView()
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        userDefaultController = appDelegate.userDefaultController
+        databaseController = appDelegate.databaseController
+        personalisedRecommendations = [Whether_Recommendation]()
         
-      
-    
-    
+    }
+        
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         personalisedRecommendations = []
@@ -58,13 +46,15 @@ class PersonaliseViewController: UIViewController, UITableViewDelegate, UITableV
         databaseController?.removeListener(listener: self)
     }
     
-    
+    //This method is not using in this class, but it is required because it is part of the DatabaseListeners.
     func onTemperatureChange(change: DatabaseChange, temperatures: [Temperature]) {
     }
     
+    //This method is not using in this class, but it is required because it is part of the DatabaseListeners.
     func onRGBChange(change: DatabaseChange, rgbs: [RGB]) {
     }
     
+    //This method activates the listeners of Whether_recommendations when it changes
     func onWhetherRecChange(change: DatabaseChange, whetherRecs: [Whether_Recommendation]) {
         let user = userDefaultController?.retrieveUserId()
         personalisedRecommendations = []
@@ -76,6 +66,17 @@ class PersonaliseViewController: UIViewController, UITableViewDelegate, UITableV
         }
     }
     
+    //This method allows to add personalised recommendations or activities to the list of activities and then to firebase.
+    func addActivityToList(newActivity: Whether_Recommendation) -> Bool {
+        personalisedRecommendations.append(newActivity)
+        tableView.beginUpdates()
+        tableView.insertRows(at: [IndexPath(row: personalisedRecommendations.count - 1, section: SECTION_ACTIVITY)], with: .automatic)
+        let indexPath = NSIndexPath(row: 0, section: SECTION_COUNT)
+        tableView.reloadRows(at: [indexPath as IndexPath], with: UITableView.RowAnimation.top)
+        tableView.endUpdates()
+        tableView.reloadSections([SECTION_ACTIVITY], with: .automatic)
+        return true
+    }
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
@@ -98,10 +99,8 @@ class PersonaliseViewController: UIViewController, UITableViewDelegate, UITableV
             tableView.deleteRows(at: [indexPath], with: .fade)
             let indexPath = NSIndexPath(row: 0, section: SECTION_COUNT)
             tableView.reloadRows(at: [indexPath as IndexPath], with: UITableView.RowAnimation.top)
-            // TODO - remove from the firebase
         }
     }
-    
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = UILabel()
@@ -109,8 +108,7 @@ class PersonaliseViewController: UIViewController, UITableViewDelegate, UITableV
             label.text = "Personal Activities"
             label.backgroundColor = UIColor(red:0.85, green:0.85, blue:0.85, alpha:1.0)
         } else {
-//            label.text = ""
-//            label.backgroundColor = UIColor.gray
+
         }
         
         return label
@@ -120,8 +118,6 @@ class PersonaliseViewController: UIViewController, UITableViewDelegate, UITableV
         if indexPath.section == SECTION_ACTIVITY {
         let cell = tableView.dequeueReusableCell(withIdentifier: CELL_ACTIVITY, for: indexPath)
         cell.textLabel?.text = personalisedRecommendations[indexPath.row].activity
-        //TODO - get details of the activity
-        //cell.detailTextLabel?.text = personalisedRecommendations[indexPath.row].details
         return cell
         }
         let cell = tableView.dequeueReusableCell(withIdentifier: CELL_COUNT, for: indexPath)
@@ -154,23 +150,6 @@ class PersonaliseViewController: UIViewController, UITableViewDelegate, UITableV
         return [deleteButton]
     }
 
-    
-    func addActivityToList(newActivity: Whether_Recommendation) -> Bool {
-        personalisedRecommendations.append(newActivity)
-        
-        tableView.beginUpdates()
-        tableView.insertRows(at: [IndexPath(row: personalisedRecommendations.count - 1, section: SECTION_ACTIVITY)], with: .automatic)
-        //tableView.insertRows(at: [IndexPath(row: 0, section: SECTION_COUNT)], with: .automatic)
-        let indexPath = NSIndexPath(row: 0, section: SECTION_COUNT)
-        tableView.reloadRows(at: [indexPath as IndexPath], with: UITableView.RowAnimation.top)
-        tableView.endUpdates()
-        tableView.reloadSections([SECTION_ACTIVITY], with: .automatic)
-        // TODO - Add this tofirebase
-        return true
-    }
-    
-    
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
        
             let destination = segue.destination as! AddActivityViewController
@@ -180,8 +159,6 @@ class PersonaliseViewController: UIViewController, UITableViewDelegate, UITableV
                 destination.checkDetailsPage = true
                 destination.detailActivity = personalisedRecommendations[selectedRow]
             }
-        
-       
     }
- 
 }
+

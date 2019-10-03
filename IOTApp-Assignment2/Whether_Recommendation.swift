@@ -8,6 +8,7 @@
 
 import UIKit
 
+//This class creates Whether_Recommendations objects
 class Whether_Recommendation: NSObject {
     var id: String
     var category: String

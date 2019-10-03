@@ -8,6 +8,7 @@
 
 import UIKit
 
+//This class allows users to add your personal details such as name , age, weight, gender
 class DetailsViewController: UIViewController {
     
     weak var userDefaultController: UserDefaultsProtocol?
@@ -16,12 +17,7 @@ class DetailsViewController: UIViewController {
     @IBOutlet var userAgeField: UITextField!
     @IBOutlet var userWeightField: UITextField!
     @IBOutlet var genderSegmentController: UISegmentedControl!
-    /*
-    @IBOutlet weak var userNameField: UITextField!
-    @IBOutlet weak var userAgeField: UITextField!
-    @IBOutlet weak var userWeightField: UITextField!
-    @IBOutlet weak var genderSegmentController: UISegmentedControl!
-    */
+  
     override func viewDidLoad() {
         super.viewDidLoad()
      
@@ -48,9 +44,10 @@ class DetailsViewController: UIViewController {
         } else {
             genderSegmentController.selectedSegmentIndex = UISegmentedControl.noSegment
         }
-        
+        self.hideKeyboardWhenTappedAround()
     }
     
+    // This method saves the user details in the userDefaults
     @IBAction func confirmDetailsButton(_ sender: Any) {
         if validateAllFields() {
             userDefaultController?.assignName(name: userNameField.text!)
@@ -65,27 +62,30 @@ class DetailsViewController: UIViewController {
             default:
                 userDefaultController?.assignGender(gender: "Other")
             }
-            //_ = navigationController?.popViewController(animated: true)
+            
+            showMessage(tittle: "Details changed succesfully", message: "Details changed succesfully")
         }
     }
     
+    //This method validates the values in the user fields
     func validateAllFields() -> Bool {
         if (userNameField.text?.isEmpty)! {
-            showToast(message: "Invalid Name. Please complete the field")
+            showMessage(tittle: "Information required", message: "Invalid Name. Please complete the field")
             return false
         }else if !validNumInRange(min: 10, max: 150, value: userAgeField.text!) {
-            showToast(message: "Invalid Age. Please complete the field")
+            showMessage(tittle: "Information required", message: "Invalid Age. Please complete the field")
             return false
         }else if !validNumInRange(min: 30, max: 250, value: userWeightField.text!) {
-            showToast(message: "Invalid Weight. Please complete the field")
+            showMessage(tittle: "Information required", message: "Invalid Weight. Please complete the field")
             return false
         }else if genderSegmentController.selectedSegmentIndex == UISegmentedControl.noSegment {
-            showToast(message: "Select Gender")
+            showMessage(tittle: "Information required", message: "Select Gender")
             return false
         }
         return true
     }
     
+    //This method checks the value if it's in the given range
     func validNumInRange(min: Int, max: Int, value: String) -> Bool {
         let num = getInt(value)
         
@@ -100,60 +100,13 @@ class DetailsViewController: UIViewController {
         return Int(data) ?? -1
     }
     
-    func showToast(message : String) {
-        
-        let toastLabel = UILabel(frame: CGRect(x: self.view.frame.size.width/2 - 75, y: self.view.frame.size.height-100, width: 150, height: 35))
-        toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        toastLabel.textColor = UIColor.white
-        toastLabel.textAlignment = .center;
-        toastLabel.font = UIFont(name: "Montserrat-Light", size: 12.0)
-        toastLabel.text = message
-        toastLabel.alpha = 1.0
-        toastLabel.layer.cornerRadius = 10;
-        toastLabel.clipsToBounds  =  true
-        self.view.addSubview(toastLabel)
-        UIView.animate(withDuration: 4.0, delay: 0.1, options: .curveEaseOut, animations: {
-            toastLabel.alpha = 0.0
-        }, completion: {(isCompleted) in
-            toastLabel.removeFromSuperview()
-        })
+    //This method shows a pop up informing changes in the information
+    func showMessage(tittle: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
-    //    func assignName(name: String) {
-//        defaults.set(name, forKey: "userNameKey")
-//    }
-//
-//    func assignGender(gender: String) {
-//        defaults.set(gender, forKey: "userGenderKey")
-//    }
-//
-//    func assignWeight(weight: Int) {
-//        defaults.set(weight, forKey: "userWeightKey")
-//    }
-//
-//    func retrieveName() -> String {
-//        var name: String = ""
-//        if let tempName = defaults.string(forKey: "userNameKey") {
-//
-//            name = tempName
-//        }
-//        return name
-//    }
-//
-//    func retrieveGender() -> String {
-//        var gender: String = ""
-//        if let tempgender = defaults.string(forKey: "userGenderKey") {
-//            print(gender)
-//            gender = tempgender
-//        }
-//        return gender
-//    }
-//
-//    func retrieveWeight() -> Int {
-//        return defaults.integer(forKey: "userWeightKey")
-//
-//    }
-//
-//
+    
     /*
     // MARK: - Navigation
 
